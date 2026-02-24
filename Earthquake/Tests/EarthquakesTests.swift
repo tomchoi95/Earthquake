@@ -23,7 +23,8 @@ struct EarthquakesTests {
         #expect(quake.time == expectedTime)
     }
 
-    @Test func geoJSONDecoderDecodesGeoJSON() async throws {
+    @Test
+    func geoJSONDecoderDecodesGeoJSON() async throws {
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .millisecondsSince1970
         let decoded = try decoder.decode(GeoJSON.self, from: testQuakesData)
@@ -33,5 +34,10 @@ struct EarthquakesTests {
         let expectedSeconds = TimeInterval(1_636_129_710_550 / 1000.0)
         let expectedTime = Date(timeIntervalSince1970: expectedSeconds)
         #expect(decoded.quakes[0].time == expectedTime)
+    }
+    
+    @Test func quakeDetailDecoder() throws {
+        let decoded = try JSONDecoder().decode(QuakeLocation.self, from: testDetail_hv72783692)
+        #expect(decoded.latitude == 19.2189998626709)
     }
 }
