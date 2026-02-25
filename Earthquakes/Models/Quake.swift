@@ -13,6 +13,7 @@ struct Quake {
     let time: Date
     let code: String
     let detail: URL
+    var location: QuakeLocation?
 }
 
 extension Quake: Identifiable {
@@ -37,10 +38,10 @@ extension Quake: Decodable {
         let rawDetail = try? values.decode(URL.self, forKey: .detail)
 
         guard let magnitude = rawMagnitude,
-              let place = rawPlace,
-              let time = rawTime,
-              let code = rawCode,
-              let detail = rawDetail
+            let place = rawPlace,
+            let time = rawTime,
+            let code = rawCode,
+            let detail = rawDetail
         else {
             throw QuakeError.missingData
         }
@@ -52,5 +53,3 @@ extension Quake: Decodable {
         self.detail = detail
     }
 }
-
-
