@@ -8,6 +8,7 @@
 import Foundation
 
 struct QuakeClient {
+    private let quakeCache: NSCache<NSString, CacheEntryObject> = NSCache()
 
     private var decoder: JSONDecoder = {
         let aDecoder = JSONDecoder()
@@ -16,7 +17,9 @@ struct QuakeClient {
     }()
 
     /// Geological data provided by the U.S. Geological Survey (USGS). See ACKNOWLEDGMENTS.txt for additional details.
-    private let feedURL = URL(string: "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson")!
+    private let feedURL = URL(
+        string: "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson"
+    )!
 
     private let downloader: any HTTPDataDownloader
 
@@ -32,4 +35,3 @@ struct QuakeClient {
         self.downloader = downloader
     }
 }
-

@@ -84,6 +84,9 @@ extension Quakes {
 #Preview {
     Quakes()
         .environment(
-            QuakesProvider(client:
-                            QuakeClient(downloader: TestDownloader())))
+            QuakesProvider(
+                client:
+                    QuakeClient(downloader: TestDownloader())
+            )
+        )
 }
